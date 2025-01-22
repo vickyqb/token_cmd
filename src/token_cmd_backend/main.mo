@@ -58,6 +58,9 @@ actor Token {
   };
   public func chargeCanister() : async Text {
     let to :Principal = Principal.fromText("c5kvi-uuaaa-aaaaa-qaaia-cai");
+    if (balances.get(to) != null) {
+      return "Already Claimed"
+    };
     let amount = 500_000_000;
     let fromBalance = await balanceOf(owner);
     if (fromBalance > amount) {
